@@ -32,4 +32,12 @@ public class UserService {
     public void handleSaveUser(User user) {
         userRepository.save(user);
     }
+
+    public User getUserById(long id) {
+        return userRepository.findFirstById(id);
+    }
+
+    public void deleteUserById(long id) {
+        this.userRepository.deleteById(id);
+    }
 }
