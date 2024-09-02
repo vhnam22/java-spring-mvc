@@ -29,22 +29,29 @@
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Create User</li>
                                 </ol>
-                                <div class="mt-5">
+                                <div class="container mt-5">
                                     <div class="row">
-                                        <div class="col-12 mx-auto">
-                                            <h3>Delete a user with id = ${id}</h3>
+                                        <div class="col-md-12 col-12 mx-auto">
+                                            <div class="d-flex justify-content-between">
+                                                <h3>User details with id = ${user.id}</h3>
+                                            </div>
                                             <hr />
-                                            <div class="alert alert-danger">
-                                                Are you sure to delete this user ?
+                                            <div class="card" style="width: 60%;">
+                                                <div class="card-header">
+                                                    User Information
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Id: ${user.id}</li>
+                                                    <li class="list-group-item">Email: ${user.email}</li>
+                                                    <li class="list-group-item">FullName: ${user.fullName}</li>
+                                                    <li class="list-group-item">Phone: ${user.phone}</li>
+                                                    <li class="list-group-item">Address: ${user.address}</li>
+                                                </ul>
                                             </div>
-                                            <div>
-                                                <a href="/admin/user/confirmDelete/${id}"
-                                                    class="btn btn-danger">Confirm</a>
-                                            </div>
-
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
                         </main>
