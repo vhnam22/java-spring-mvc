@@ -33,14 +33,14 @@ public class UserController {
         this.PasswordEncoder = PasswordEncoder;
     }
 
-    @GetMapping("/")
-    public String getHomePage(Model model) {
-        List<User> userLst = userService.getAllUsersByEmail("admin@gmail.com");
-        System.out.println(userLst);
-        String test = this.userService.handleHello();
-        model.addAttribute("eric", test);
-        return "hello";
-    }
+    // @GetMapping("/")
+    // public String getHomePage(Model model) {
+    // List<User> userLst = userService.getAllUsersByEmail("admin@gmail.com");
+    // System.out.println(userLst);
+    // String test = this.userService.handleHello();
+    // model.addAttribute("eric", test);
+    // return "hello";
+    // }
 
     @GetMapping("/admin/user/create")
     public String getUserPage(Model model) {
