@@ -1,11 +1,14 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -15,6 +18,8 @@ import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -49,8 +54,19 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(@ModelAttribute("newUser") User hoidanit,
+    public String createUserPage(@ModelAttribute("newUser") @Valid User hoidanit,
+            BindingResult newUserBindingResult,
             @RequestParam("imgFile") MultipartFile file) {
+
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError err : errors) {
+            System.out.println(">>>>" + err.getField() + "-" + err.getDefaultMessage());
+        }
+        // validate
+
+        if (newUserBindingResult.hasErrors()) {
+            return "/admin/user/create";
+        }
 
         String avatar = uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.PasswordEncoder.encode(hoidanit.getPassword());

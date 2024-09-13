@@ -2,12 +2,16 @@ package vn.hoidanit.laptopshop.domain;
 
 import java.util.List;
 
+import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -16,11 +20,21 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
+    @NotEmpty(message = "Name is not null.")
     private String name;
+
+    @NotNull
+    @NotEmpty(message = "Detail description is not null.")
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String detailDesc;
+
+    @NotNull
+    @NotEmpty(message = "Short description is not null.")
+    private String shortDesc;
+
     private double price;
     private String image;
-    private String detailDesc;
-    private String shortDesc;
     private long quantity;
     private long sold;
     private String factory;

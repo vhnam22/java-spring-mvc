@@ -1,28 +1,27 @@
 package vn.hoidanit.laptopshop.controller.client;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.service.ProductService;
 
 @Controller
-public class HomePageController {
+public class ItemController {
 
     private final ProductService productService;
 
-    public HomePageController(ProductService productService) {
+    public ItemController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/")
-    public String GetMapping(Model model) {
-        List<Product> products = productService.getAllProduct();
-        model.addAttribute("products", products);
-        return "client/homepage/show";
+    @GetMapping("/product/{id}")
+    public String getMethodName(@PathVariable long id, Model model) {
+        Product product = productService.getDetailProduct(id);
+        model.addAttribute("product", product);
+        return "/client/product/detail";
     }
 
 }

@@ -48,8 +48,14 @@
                                             <form:form action="/admin/user/create" method="post"
                                                 modelAttribute="newUser" class="row" enctype="multipart/form-data">
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="emailHasBindError">
+                                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Email:</label>
-                                                    <form:input type="email" class="form-control" path="email" />
+                                                    <form:input type="email"
+                                                        class="form-control  ${not empty emailHasBindError ? 'is-invalid':''}"
+                                                        path="email" />
+                                                    ${emailHasBindError}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Password:</label>

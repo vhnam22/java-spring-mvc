@@ -12,7 +12,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Create User - Hỏi Dân IT</title>
+                <title>Delete Product - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -24,21 +24,21 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Delete User</h1>
+                                <h1 class="mt-4">Delete Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Delete User</li>
+                                    <li class="breadcrumb-item active">Delete Product</li>
                                 </ol>
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <h3>Delete a user with id = ${id}</h3>
+                                            <h3>Delete a product with id = ${id}</h3>
                                             <hr />
                                             <div class="alert alert-danger">
-                                                Are you sure to delete this user ?
+                                                Are you sure to delete this product ?
                                             </div>
                                             <div>
-                                                <a href="/admin/user/confirmDelete/${id}"
+                                                <a href="/admin/product/confirmDelete/${id}"
                                                     class="btn btn-danger">Confirm</a>
                                             </div>
 
