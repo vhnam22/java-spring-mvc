@@ -16,10 +16,7 @@ import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UploadService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.io.File;
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProductController {
@@ -43,7 +40,7 @@ public class ProductController {
     @GetMapping("/admin/product/create")
     public String getCreateProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping("/admin/product/create")
@@ -51,7 +48,7 @@ public class ProductController {
             BindingResult newProductBindingResult,
             @RequestParam("imgFile") MultipartFile file) {
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String image = uploadService.handleSaveUploadFile(file, "product");
         product.setImage(image);
@@ -62,7 +59,7 @@ public class ProductController {
     @GetMapping("/admin/product/delete/{id}")
     public String handleDeleteProduct(@PathVariable long id, Model model) {
         model.addAttribute("id", id);
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @GetMapping("/admin/product/confirmDelete/{id}")
@@ -75,21 +72,21 @@ public class ProductController {
     public String detailProduct(@PathVariable long id, Model model) {
         Product product = productService.getDetailProduct(id);
         model.addAttribute("product", product);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/update/{id}")
     public String getUpdateProductPage(@PathVariable long id, Model model) {
         Product product = productService.getDetailProduct(id);
         model.addAttribute("newProduct", product);
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
     public String postMethodName(@ModelAttribute("newProduct") @Valid Product newProduct,
             BindingResult newProductBindingResult, @RequestParam("imgFile") MultipartFile file) {
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/update";
+            return "admin/product/update";
         }
 
         Product product = productService.getDetailProduct(newProduct.getId());

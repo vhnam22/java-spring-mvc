@@ -26,23 +26,16 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min = 3, max = 20)
+    @Size(min = 3, message = "Min 3 character.")
     private String password;
 
     @NotNull
     private String fullName;
-
-    @NotNull
     private String address;
-
-    @NotNull
     private String phone;
-
-    @NotNull
     private String avatar;
 
     @NotNull
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

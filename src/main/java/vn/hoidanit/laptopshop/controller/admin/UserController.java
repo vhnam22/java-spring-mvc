@@ -29,13 +29,13 @@ public class UserController {
     // DI: dependency injection
     private final UserService userService;
     private final UploadService uploadService;
-    private PasswordEncoder PasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService, UploadService uploadService,
-            PasswordEncoder PasswordEncoder) {
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
-        this.PasswordEncoder = PasswordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // @GetMapping("/")
@@ -50,7 +50,7 @@ public class UserController {
     @GetMapping("/admin/user/create")
     public String getUserPage(Model model) {
         model.addAttribute("newUser", new User());
-        return "/admin/user/create";
+        return "admin/user/create";
     }
 
     @PostMapping("/admin/user/create")
@@ -65,11 +65,11 @@ public class UserController {
         // validate
 
         if (newUserBindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
 
         String avatar = uploadService.handleSaveUploadFile(file, "avatar");
-        String hashPassword = this.PasswordEncoder.encode(hoidanit.getPassword());
+        String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
         hoidanit.setAvatar(avatar);
         hoidanit.setPassword(hashPassword);
         hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
@@ -81,21 +81,21 @@ public class UserController {
     public String userManage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
-        return "/admin/user/show";
+        return "admin/user/show";
     }
 
     @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        return "/admin/user/detail";
+        return "admin/user/detail";
     }
 
     @GetMapping("/admin/user/update/{id}")
     public String getUpdateUser(@PathVariable long id, Model model) {
         User user = userService.getUserById(id);
         model.addAttribute("newUser", user);
-        return "/admin/user/update";
+        return "admin/user/update";
     }
 
     @PostMapping("admin/user/update")
@@ -114,7 +114,7 @@ public class UserController {
     @GetMapping("admin/user/delete/{id}")
     public String getDeleteUserPage(@PathVariable long id, Model model) {
         model.addAttribute("id", id);
-        return "/admin/user/delete";
+        return "admin/user/delete";
     }
 
     @GetMapping("admin/user/confirmDelete/{id}")

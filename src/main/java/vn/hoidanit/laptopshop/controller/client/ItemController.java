@@ -21,7 +21,7 @@ public class ItemController {
     public String getMethodName(@PathVariable long id, Model model) {
         Product product = productService.getDetailProduct(id);
         model.addAttribute("product", product);
-        return "/client/product/detail";
+        return "client/product/detail";
     }
 
 }
