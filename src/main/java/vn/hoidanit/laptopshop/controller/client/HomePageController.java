@@ -17,6 +17,7 @@ import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
@@ -65,6 +66,11 @@ public class HomePageController {
     @GetMapping("/login")
     public String getLoginPage(Model model) {
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage() {
+        return "client/auth/deny";
     }
 
 }

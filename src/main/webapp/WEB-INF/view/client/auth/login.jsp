@@ -63,6 +63,11 @@
                                                             Invalid email or password.
                                                         </div>
                                                     </c:if>
+                                                    <c:if test="${param.logout != null}">
+                                                        <div class="my-2" style="color: green;">
+                                                            Logout success.
+                                                        </div>
+                                                    </c:if>
                                                     <div class="mt-4 mb-0">
                                                         <div class="d-grid">
                                                             <button class="btn btn-primary btn-block">
