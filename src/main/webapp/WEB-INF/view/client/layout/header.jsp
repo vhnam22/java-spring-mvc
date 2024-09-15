@@ -18,11 +18,13 @@
                         </div>
                         <div class="d-flex m-3 me-0">
                             <c:if test="${not empty pageContext.request.userPrincipal}">
-                                <a href="#" class="position-relative me-4 my-auto">
+                                <a href="/cart" class="position-relative me-4 my-auto">
                                     <i class="fa fa-shopping-bag fa-2x"></i>
                                     <span
                                         class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                        style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                        style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
+                                        ${sessionScope.sumCart != null ? sessionScope.sumCart :'0'}
+                                    </span>
                                 </a>
                                 <div class="dropdown my-auto">
                                     <a href="#" class="dropdown" role="button" id="dropdownMenuLink"
@@ -30,7 +32,7 @@
                                         aria-expanded="false">
                                         <i class="fas fa-user fa-2x"></i>
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-end p-4" arialabelledby="dropdownMenuLink">
+                                    <ul class="dropdown-menu dropdown-menu-end p-4" aria-label="dropdownMenuLink">
                                         <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
                                             <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
                                                 src="/images/avatar/${sessionScope.avatar}" />

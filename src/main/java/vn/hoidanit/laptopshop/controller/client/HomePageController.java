@@ -1,5 +1,6 @@
 package vn.hoidanit.laptopshop.controller.client;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
@@ -16,8 +18,9 @@ import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
@@ -71,6 +74,19 @@ public class HomePageController {
     @GetMapping("/access-deny")
     public String getDenyPage() {
         return "client/auth/deny";
+    }
+
+    @GetMapping("/cart")
+    public String getCartPage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        List<CartDetail> cartDetails = productService.getAllCartDetail(session);
+        model.addAttribute("cartDetails", cartDetails);
+        double total = 0;
+        for (CartDetail cartDetail : cartDetails) {
+            total += cartDetail.getQuantity() * cartDetail.getPrice();
+        }
+        model.addAttribute("subTotal", total);
+        return "client/cart/show";
     }
 
 }
